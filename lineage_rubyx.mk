@@ -19,6 +19,9 @@ PRODUCT_MANUFACTURER := Xiaomi
 PRODUCT_BRAND := Redmi
 PRODUCT_MODEL := ruby
 
+# Enable animation override to fix lag on fewer mediatek devices
+PERF_ANIM_OVERRIDE := true
+
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
