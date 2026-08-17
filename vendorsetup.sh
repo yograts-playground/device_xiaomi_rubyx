@@ -1,10 +1,18 @@
 #!/bin/bash
 set -e
 
+GREEN="\033[0;32m"
+YELLOW="\033[1;33m"
+END="\033[0m"
+
+STANDARD_BRANCH="bka"
+MIUICAM_BRANCH="lineage-23.0"
+RUBYXLABS_BRANCH="lineage-23.2"
+MEDIATEK_BRANCH="lineage-23"
 BUILD_TOP="${ANDROID_BUILD_TOP:-$(pwd)}"
 DEVICE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CLANG_DIR="$BUILD_TOP/prebuilts/clang/host/linux-x86/clang-r563880"
-CLANG_REPO="https://github.com/Aeron-Aeron/linux-x86-clang-21.0.0-r563880"
+CLANG_REPO="https://github.com/Aeron-Aeron/linux-x86-clang-21.0.0-r563880.git"
 CORE_DIR="$BUILD_TOP/system/core"
 LIBUTILS_PATCH="$DEVICE_DIR/patches/libutils.patch"
 
@@ -29,15 +37,6 @@ else
     echo "[vendorsetup] Missing system/core or patches/libutils.patch. Skipping libutils patch."
 fi
 
-GREEN="\033[0;32m"
-YELLOW="\033[1;33m"
-END="\033[0m"
-
-STANDARD_BRANCH="bka"
-MIUICAM_BRANCH="lineage-23.0"
-RUBYXLABS_BRANCH="lineage-23.2"
-MEDIATEK_BRANCH="lineage-23"
-
 check_dir() {
     if [ -d "$1" ]; then
         echo -e "${YELLOW}• $1 already exists. Skipping cloning...${END}"
@@ -53,7 +52,7 @@ fi
 
 if check_dir kernel/xiaomi/mt6877; then
     echo -e "${GREEN}Cloning kernel source from Yograt's Playground (branch: ${YELLOW}$STANDARD_BRANCH${GREEN})...${END}"
-    git clone https://github.com/yograts-playground/kernel_xiaomi_mt6877 -b $STANDARD_BRANCH kernel/xiaomi/mt6877 --depth=1
+    git clone https://github.com/yograts-playground/kernel_xiaomi_mt6877 -b cnb kernel/xiaomi/mt6877 --depth=1
 fi
 
 if check_dir device/xiaomi/miuicamera-rubyx; then
